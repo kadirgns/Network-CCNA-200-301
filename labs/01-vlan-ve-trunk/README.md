@@ -32,6 +32,7 @@ sonuçtur; yönlendirme bir sonraki labın konusu.
 ### Adresleme
 
 | VLAN | Ad | Ağ | Hostlar |
+|---|---|---|---|
 | 10 | OFIS | 192.168.10.0/24 | PC1 `.11`, PC3 `.13` |
 | 20 | MUHASEBE | 192.168.20.0/24 | PC2 `.12`, PC4 `.14` |
 | 999 | NATIVE-KULLANILMIYOR | — | trunk native VLAN, hiçbir porta atanmaz |
@@ -54,6 +55,7 @@ Tam konfigürasyonlar `configs/` klasöründe. Özet:
 Tam çıktılar `verification.txt` dosyasında.
 
 | Test | Beklenen | Sonuç |
+|---|---|---|---|
 | PC1 → PC3 (aynı VLAN, trunk üzerinden) | Geçer | 
 | PC2 → PC4 (aynı VLAN, trunk üzerinden) | Geçer | 
 | PC1 → PC2 (farklı VLAN, yönlendirme yok) | no gateway found |
