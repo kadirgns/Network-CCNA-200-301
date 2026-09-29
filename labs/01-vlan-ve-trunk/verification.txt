@@ -1,0 +1,90 @@
+PC1> ping 192.168.10.13
+
+84 bytes from 192.168.10.13 icmp_seq=1 ttl=64 time=3.028 ms
+84 bytes from 192.168.10.13 icmp_seq=2 ttl=64 time=3.510 ms
+84 bytes from 192.168.10.13 icmp_seq=3 ttl=64 time=4.110 ms
+84 bytes from 192.168.10.13 icmp_seq=4 ttl=64 time=4.444 ms
+84 bytes from 192.168.10.13 icmp_seq=5 ttl=64 time=4.031 ms
+
+PC1> ping 192.168.20.12
+
+No gateway found
+
+PC1> 
+=================================================================
+PC1> ping 192.168.10.13
+
+84 bytes from 192.168.10.13 icmp_seq=1 ttl=64 time=3.028 ms
+84 bytes from 192.168.10.13 icmp_seq=2 ttl=64 time=3.510 ms
+84 bytes from 192.168.10.13 icmp_seq=3 ttl=64 time=4.110 ms
+84 bytes from 192.168.10.13 icmp_seq=4 ttl=64 time=4.444 ms
+84 bytes from 192.168.10.13 icmp_seq=5 ttl=64 time=4.031 ms
+
+PC1> ping 192.168.20.12
+
+No gateway found
+
+PC1> 
+
+======================================================================
+SW1#show vlan brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi1/0, Gi1/1, Gi1/2, Gi1/3
+                                                Gi2/0, Gi2/1, Gi2/2, Gi2/3
+                                                Gi3/0, Gi3/1, Gi3/2, Gi3/3
+10   OFIS                             active    Gi0/1
+20   MUHASEBE                         active    Gi0/2
+999  NATIVE-KULLANILMIYOR             active    Gi0/3
+1002 fddi-default                     act/unsup 
+1003 token-ring-default               act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trnet-default     
+==============================================================================
+SW1#show interfaces trunk
+
+Port        Mode             Encapsulation  Status        Native vlan
+Gi0/0       on               802.1q         trunking      999
+
+Port        Vlans allowed on trunk
+Gi0/0       10,20
+
+Port        Vlans allowed and active in management domain
+Gi0/0       10,20
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gi0/0       10,20
+=======================================================================
+TRUNK YAPISI
+configure terminal
+interface GigabitEthernet0/0
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport trunk native vlan 999
+ switchport trunk allowed vlan 10,20
+ switchport nonegotiate
+end
+
+NOT:Kapsülleme türünü destekleyen switch'lerde switchport trunk encapsulation dot1q komutu switchport mode trunk'tan önce gelmeli, yoksa mode komutu reddedilir.
+
+========================================================================
+SW1#conf t
+Enter configuration commands, one per line.  End with CNTL/Z.
+SW1(config)#interface gig
+SW1(config)#interface gigabitEthernet 0/0
+SW1(config-if)# swit
+SW1(config-if)# switchport 
+SW1(config-if)# switchport tr
+SW1(config-if)# switchport trunk native vlan 1,
+                                              ^
+% Invalid input detected at '^' marker.
+
+SW1(config-if)# switchport trunk native vlan 1 
+SW1(config-if)#end
+SW1#
+*Sep 29 11:20:54.643: %SYS-5-CONFIG_I: Configured from console by console
+SW1#
+*Sep 29 11:21:28.205: %CDP-4-NATIVE_VLAN_MISMATCH: Native VLAN mismatch discovered on GigabitEthernet0/0 (1), with SW2 GigabitEthernet0/0 (999).
+
+NOT:yarıyı CDP üretiyor. Yani iki ucun native VLAN'ı farklı olduğunda IOS seni uyarır ama trafiği durdurmaz — native VLAN'daki çerçeveler sessizce yanlış VLAN'a düşer.
