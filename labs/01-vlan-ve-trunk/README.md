@@ -3,6 +3,10 @@
 
 **Platform:** GNS3 · 2 × Cisco IOSvL2 15.2 · 4 × VPCS
 
+### Labı kendin çalıştırmak
+
+`lab-b04-01-vlan-trunk.gns3project` dosyasını indirip GNS3'te
+**File → Import portable project** ile aç.
 
 ## Amaç
 
