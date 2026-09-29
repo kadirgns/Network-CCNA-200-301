@@ -19,6 +19,9 @@ sonuçtur; yönlendirme bir sonraki labın konusu.
 ## Topoloji
 
 
+![Topoloji](topology-b04-01.png)
+
+
 | Cihaz | Port | Bağlantı | Rol |
 |---|---|---|---|
 | SW1 | Gi0/0 | SW2 Gi0/0 | 802.1Q trunk |
