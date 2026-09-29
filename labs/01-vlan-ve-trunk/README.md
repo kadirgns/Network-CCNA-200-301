@@ -18,7 +18,6 @@ sonuçtur; yönlendirme bir sonraki labın konusu.
 
 ## Topoloji
 
-![Topoloji](topology-b04-01.png)
 
 | Cihaz | Port | Bağlantı | Rol |
 |---|---|---|---|
