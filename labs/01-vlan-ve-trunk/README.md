@@ -5,8 +5,7 @@
 
 ### Labı kendin çalıştırmak
 
-`lab-b04-01-vlan-trunk.gns3project` dosyasını indirip GNS3'te
-**File → Import portable project** ile aç.
+`lab-b04-01-vlan-trunk.gns3project` dosyasını indirip GNS3 ile aç.
 
 ## Amaç
 
