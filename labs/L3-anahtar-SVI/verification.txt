@@ -1,0 +1,68 @@
+PC1> ping 192.168.20.12
+
+84 bytes from 192.168.20.12 icmp_seq=1 ttl=63 time=2.178 ms
+84 bytes from 192.168.20.12 icmp_seq=2 ttl=63 time=2.311 ms
+84 bytes from 192.168.20.12 icmp_seq=3 ttl=63 time=2.352 ms
+84 bytes from 192.168.20.12 icmp_seq=4 ttl=63 time=1.995 ms
+84 bytes from 192.168.20.12 icmp_seq=5 ttl=63 time=2.168 ms
+
+PC1> ping 192.168.10.13 
+
+84 bytes from 192.168.10.13 icmp_seq=1 ttl=64 time=0.938 ms
+84 bytes from 192.168.10.13 icmp_seq=2 ttl=64 time=0.863 ms
+84 bytes from 192.168.10.13 icmp_seq=3 ttl=64 time=2.079 ms
+84 bytes from 192.168.10.13 icmp_seq=4 ttl=64 time=2.434 ms
+84 bytes from 192.168.10.13 icmp_seq=5 ttl=64 time=1.606 ms
+
+PC1> ping 192.168.10.13 
+
+84 bytes from 192.168.10.13 icmp_seq=1 ttl=64 time=1.659 ms
+84 bytes from 192.168.10.13 icmp_seq=2 ttl=64 time=2.359 ms
+84 bytes from 192.168.10.13 icmp_seq=3 ttl=64 time=1.446 ms
+84 bytes from 192.168.10.13 icmp_seq=4 ttl=64 time=1.903 ms
+84 bytes from 192.168.10.13 icmp_seq=5 ttl=64 time=1.044 ms
+
+PC1> ping 203.0.113.1
+
+84 bytes from 203.0.113.1 icmp_seq=1 ttl=254 time=34.642 ms
+84 bytes from 203.0.113.1 icmp_seq=2 ttl=254 time=35.587 ms
+84 bytes from 203.0.113.1 icmp_seq=3 ttl=254 time=25.241 ms
+84 bytes from 203.0.113.1 icmp_seq=4 ttl=254 time=6.153 ms
+84 bytes from 203.0.113.1 icmp_seq=5 ttl=254 time=35.835 ms
+
+PC1> trace 192.168.20.12
+trace to 192.168.20.12, 8 hops max, press Ctrl+C to stop
+ 1   192.168.10.1   1.667 ms  0.862 ms  1.101 ms
+ 2   *192.168.20.12   4.804 ms (ICMP type:3, code:3, Destination port unreachable)
+
+PC1> trace 203.0.113.1  
+trace to 203.0.113.1, 8 hops max, press Ctrl+C to stop
+ 1   192.168.10.1   1.742 ms  2.022 ms  1.348 ms
+ 2   *10.0.0.2   14.872 ms (ICMP type:3, code:3, Destination port unreachable)
+ 
+ ===========================================================================
+ R1(config)#interface FastEthernet0/0
+R1(config-if)#shutdown
+R1(config-if)#
+*Mar  1 00:42:31.135: %LINK-5-CHANGED: Interface FastEthernet0/0, changed state to administratively down
+*Mar  1 00:42:32.135: %LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to down
+R1(config-if)#
+
+
+PC1> ping 192.168.20.12
+
+84 bytes from 192.168.20.12 icmp_seq=1 ttl=63 time=5.360 ms
+84 bytes from 192.168.20.12 icmp_seq=2 ttl=63 time=2.371 ms
+84 bytes from 192.168.20.12 icmp_seq=3 ttl=63 time=2.705 ms
+84 bytes from 192.168.20.12 icmp_seq=4 ttl=63 time=2.263 ms
+84 bytes from 192.168.20.12 icmp_seq=5 ttl=63 time=2.468 ms
+
+PC1> ping 203.0.113.1
+
+203.0.113.1 icmp_seq=1 timeout
+203.0.113.1 icmp_seq=2 timeout
+203.0.113.1 icmp_seq=3 timeout
+203.0.113.1 icmp_seq=4 timeout
+203.0.113.1 icmp_seq=5 timeout
+
+NOT:İlki geçer, ikincisi ölür. VLAN'lar arası trafik SW1'de dönüyor, R1'e ihtiyaç duymuyor; dışarıya çıkış ise R1'e bağlı.
