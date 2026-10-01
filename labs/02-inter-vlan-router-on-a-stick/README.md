@@ -21,7 +21,7 @@ Lab 01'deki topoloji aynen korundu, üzerine R1 ve 4 PC eklendi. Yani bu lab bir
 
 ## Topoloji
 
-![Topoloji](topology-b04-02.png)
+![Topoloji](topology-lab02.png)
 
 | Cihaz | Port | Bağlantı | Rol |
 |---|---|---|---|
