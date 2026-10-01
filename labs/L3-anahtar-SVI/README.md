@@ -21,7 +21,7 @@ Kanıtlanacak dört şey:
 
 ## Topoloji
 
-![Topoloji](topology-b04-03.png)
+![Topoloji](topology-lab03.png)
 
 | Cihaz | Port | Bağlantı | Rol |
 |---|---|---|---|
