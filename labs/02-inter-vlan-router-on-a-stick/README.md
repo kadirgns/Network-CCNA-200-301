@@ -150,35 +150,8 @@ VLAN 10'dan VLAN 20'ye giden her paket SW1–R1 hattından **iki kez** geçiyor:
 bir kez yukarı, bir kez aşağı. 8 host ile sorun değil ama trafik arttığında
 bu hat doyar — bir sonraki labın (L3 switch SVI) var oluş sebebi tam olarak bu.
 
-## Kırmalar
-
-<!-- Üç kırmayı da yaptın ve geri aldın. Her birinin gözlemini buraya tek
-     cümleyle yaz, sonra bu yorum satırını sil. Çıktılar verification.txt'de. -->
-
-| Kırma | Yapılan | Gözlem |
-|---|---|---|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-
-## Sınavda
-
-- Router-on-a-stick'te fiziksel arayüze **IP verilmez**; IP'ler alt arayüzlerdedir.
-  Sorularda fiziksel arayüzde IP gören şıkkı eleyeceksin.
-- `encapsulation dot1Q <vlan>` komutu `ip address`'ten **önce** gelmek zorunda.
-- `native` anahtar kelimesi `encapsulation` satırındadır; native VLAN alt arayüzü
-  IP taşımaz.
-- Switch tarafındaki port **trunk** olmalı, access değil. Router-on-a-stick'in
-  en sık sorulan arıza senaryosu budur.
-- TTL okuması: `255` = router'ın kendisi, `64` = L2'de kaldı, `63` = bir router
-  atlaması. Switch TTL'i düşürmez.
-- Bu tasarımın sınırı tek fiziksel hat; CCNA bunu "router-on-a-stick darboğazı"
-  olarak sorar ve çözüm olarak L3 switch SVI'yi bekler.
 
 ## Labı kendin çalıştırmak
 
 `configs/` altındaki dosyalar düz IOS konfigürasyonlarıdır; GNS3'te topolojiyi
-kurup konsoldan yapıştırman yeterli. Depoda IOS imajı **yok** ve olmayacak —
-Cisco IOS imajları Cisco'nun lisansına tabidir, dağıtılamaz. İmajları kendi
-lisanslı kaynağından (Cisco VIRL/CML, DevNet, GNS3 marketplace'teki açık
-cihazlar) temin etmen gerekir.
+kurup konsoldan yapıştırman yeterli.
