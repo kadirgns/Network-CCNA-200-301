@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 720" width="980" height="720" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <style>
+      .bg{fill:#FBFCFB}
+      .ink{fill:#131C1E}
+      .mut{fill:#66787A}
+      .mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace}
+      .dev{fill:#FFFFFF;stroke:#131C1E;stroke-width:1.6}
+      .lnk{stroke-width:1.8;fill:none}
+      .v10{stroke:#1D6FA3}
+      .v20{stroke:#B35418}
+      .trunk{stroke:#0E6E78;stroke-width:3.5;fill:none}
+      .lbl{font-size:12px}
+      .port{font-size:10.5px;fill:#66787A}
+      .h1{font-size:19px;font-weight:700}
+      .h2{font-size:12px;font-weight:600;letter-spacing:.14em}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="980" height="720"/>
+
+  <text class="h2 mut mono" x="40" y="42">LAB 02</text>
+  <text class="h1 ink" x="40" y="70">Router-on-a-Stick — VLAN'lar Arası Yönlendirme</text>
+  <line x1="40" y1="84" x2="940" y2="84" stroke="#DCE3E2" stroke-width="1.5"/>
+
+  <!-- R1 -->
+  <rect class="dev" x="175" y="108" width="150" height="52" rx="3" stroke="#0E6E78" stroke-width="2"/>
+  <text class="ink" x="250" y="132" text-anchor="middle" font-size="16" font-weight="700">R1</text>
+  <text class="port mono" x="250" y="149" text-anchor="middle">Cisco 3745</text>
+
+  <rect x="350" y="100" width="300" height="70" rx="3" fill="#E4F1F2" stroke="#0E6E78" stroke-width="1.2"/>
+  <text class="port mono" x="364" y="119" fill="#0A555D">Fa0/0.10    encap dot1Q 10    192.168.10.1</text>
+  <text class="port mono" x="364" y="137" fill="#0A555D">Fa0/0.20    encap dot1Q 20    192.168.20.1</text>
+  <text class="port mono" x="364" y="155" fill="#0A555D">Fa0/0.999   encap dot1Q 999 native</text>
+
+  <!-- R1 -> SW1 -->
+  <path class="trunk" d="M 250 160 L 250 296"/>
+  <text class="port mono" x="243" y="184" text-anchor="end">Fa0/0</text>
+  <text class="port mono" x="243" y="288" text-anchor="end">Gi2/0</text>
+  <rect x="262" y="206" width="124" height="26" rx="3" fill="#E4F1F2" stroke="#0E6E78" stroke-width="1"/>
+  <text class="port mono" x="324" y="223" text-anchor="middle" fill="#0A555D">TRUNK 10,20</text>
+
+  <!-- SW1 / SW2 -->
+  <rect class="dev" x="170" y="296" width="160" height="52" rx="3"/>
+  <text class="ink" x="250" y="320" text-anchor="middle" font-size="16" font-weight="700">SW1</text>
+  <text class="port mono" x="250" y="337" text-anchor="middle">IOSvL2 15.2</text>
+
+  <rect class="dev" x="630" y="296" width="160" height="52" rx="3"/>
+  <text class="ink" x="710" y="320" text-anchor="middle" font-size="16" font-weight="700">SW2</text>
+  <text class="port mono" x="710" y="337" text-anchor="middle">IOSvL2 15.2</text>
+
+  <line class="trunk" x1="330" y1="322" x2="630" y2="322"/>
+  <rect x="405" y="300" width="150" height="26" rx="3" fill="#E4F1F2" stroke="#0E6E78" stroke-width="1"/>
+  <text class="port mono" x="480" y="317" text-anchor="middle" fill="#0A555D">native 999 · 10,20</text>
+  <text class="port mono" x="336" y="314" text-anchor="start">Gi0/0</text>
+  <text class="port mono" x="624" y="314" text-anchor="end">Gi0/0</text>
+
+  <!-- SW1 -> PC1..PC4 -->
+  <path class="lnk v10" d="M 190 348 L 190 386 L  88 386 L  88 470"/>
+  <path class="lnk v20" d="M 230 348 L 230 398 L 196 398 L 196 470"/>
+  <path class="lnk v10" d="M 270 348 L 270 410 L 304 410 L 304 470"/>
+  <path class="lnk v20" d="M 310 348 L 310 422 L 412 422 L 412 470"/>
+
+  <!-- SW2 -> PC5..PC8 -->
+  <path class="lnk v10" d="M 650 348 L 650 386 L 548 386 L 548 470"/>
+  <path class="lnk v20" d="M 690 348 L 690 398 L 656 398 L 656 470"/>
+  <path class="lnk v10" d="M 730 348 L 730 410 L 764 410 L 764 470"/>
+  <path class="lnk v20" d="M 770 348 L 770 422 L 872 422 L 872 470"/>
+
+  <!-- PC kutulari -->
+  <g>
+    <rect class="dev" x="40" y="470" width="96" height="78" rx="3" stroke="#1D6FA3"/>
+    <text class="ink" x="88" y="490" text-anchor="middle" font-size="13" font-weight="700">PC1</text>
+    <text class="port mono" x="88" y="506" text-anchor="middle" fill="#1D6FA3">VLAN 10</text>
+    <text class="port mono" x="88" y="522" text-anchor="middle">.10.11</text>
+    <text class="port mono" x="88" y="539" text-anchor="middle">SW1 Gi0/1</text>
+  </g>
+  <g>
+    <rect class="dev" x="148" y="470" width="96" height="78" rx="3" stroke="#B35418"/>
+    <text class="ink" x="196" y="490" text-anchor="middle" font-size="13" font-weight="700">PC2</text>
+    <text class="port mono" x="196" y="506" text-anchor="middle" fill="#B35418">VLAN 20</text>
+    <text class="port mono" x="196" y="522" text-anchor="middle">.20.12</text>
+    <text class="port mono" x="196" y="539" text-anchor="middle">SW1 Gi0/2</text>
+  </g>
+  <g>
+    <rect class="dev" x="256" y="470" width="96" height="78" rx="3" stroke="#1D6FA3"/>
+    <text class="ink" x="304" y="490" text-anchor="middle" font-size="13" font-weight="700">PC3</text>
+    <text class="port mono" x="304" y="506" text-anchor="middle" fill="#1D6FA3">VLAN 10</text>
+    <text class="port mono" x="304" y="522" text-anchor="middle">.10.13</text>
+    <text class="port mono" x="304" y="539" text-anchor="middle">SW1 Gi0/3</text>
+  </g>
+  <g>
+    <rect class="dev" x="364" y="470" width="96" height="78" rx="3" stroke="#B35418"/>
+    <text class="ink" x="412" y="490" text-anchor="middle" font-size="13" font-weight="700">PC4</text>
+    <text class="port mono" x="412" y="506" text-anchor="middle" fill="#B35418">VLAN 20</text>
+    <text class="port mono" x="412" y="522" text-anchor="middle">.20.14</text>
+    <text class="port mono" x="412" y="539" text-anchor="middle">SW1 Gi1/0</text>
+  </g>
+
+  <g>
+    <rect class="dev" x="500" y="470" width="96" height="78" rx="3" stroke="#1D6FA3"/>
+    <text class="ink" x="548" y="490" text-anchor="middle" font-size="13" font-weight="700">PC5</text>
+    <text class="port mono" x="548" y="506" text-anchor="middle" fill="#1D6FA3">VLAN 10</text>
+    <text class="port mono" x="548" y="522" text-anchor="middle">.10.15</text>
+    <text class="port mono" x="548" y="539" text-anchor="middle">SW2 Gi0/1</text>
+  </g>
+  <g>
+    <rect class="dev" x="608" y="470" width="96" height="78" rx="3" stroke="#B35418"/>
+    <text class="ink" x="656" y="490" text-anchor="middle" font-size="13" font-weight="700">PC6</text>
+    <text class="port mono" x="656" y="506" text-anchor="middle" fill="#B35418">VLAN 20</text>
+    <text class="port mono" x="656" y="522" text-anchor="middle">.20.16</text>
+    <text class="port mono" x="656" y="539" text-anchor="middle">SW2 Gi0/2</text>
+  </g>
+  <g>
+    <rect class="dev" x="716" y="470" width="96" height="78" rx="3" stroke="#1D6FA3"/>
+    <text class="ink" x="764" y="490" text-anchor="middle" font-size="13" font-weight="700">PC7</text>
+    <text class="port mono" x="764" y="506" text-anchor="middle" fill="#1D6FA3">VLAN 10</text>
+    <text class="port mono" x="764" y="522" text-anchor="middle">.10.17</text>
+    <text class="port mono" x="764" y="539" text-anchor="middle">SW2 Gi0/3</text>
+  </g>
+  <g>
+    <rect class="dev" x="824" y="470" width="96" height="78" rx="3" stroke="#B35418"/>
+    <text class="ink" x="872" y="490" text-anchor="middle" font-size="13" font-weight="700">PC8</text>
+    <text class="port mono" x="872" y="506" text-anchor="middle" fill="#B35418">VLAN 20</text>
+    <text class="port mono" x="872" y="522" text-anchor="middle">.20.18</text>
+    <text class="port mono" x="872" y="539" text-anchor="middle">SW2 Gi1/0</text>
+  </g>
+
+  <text class="h2 mut mono" x="40" y="594">DOGRULANAN</text>
+
+  <g transform="translate(40,608)">
+    <rect x="0" y="0" width="288" height="30" rx="3" fill="#E6F2EA" stroke="#2F7A50" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="15" font-weight="700" fill="#2F7A50">✓</text>
+    <text class="lbl mono" x="32" y="20" fill="#1E5637">VLAN'lar arasi: ttl=63 (1 hop)</text>
+  </g>
+  <g transform="translate(346,608)">
+    <rect x="0" y="0" width="288" height="30" rx="3" fill="#E6F2EA" stroke="#2F7A50" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="15" font-weight="700" fill="#2F7A50">✓</text>
+    <text class="lbl mono" x="32" y="20" fill="#1E5637">VLAN ici: ttl=64 (router yok)</text>
+  </g>
+  <g transform="translate(652,608)">
+    <rect x="0" y="0" width="288" height="30" rx="3" fill="#E4F1F2" stroke="#0E6E78" stroke-width="1.2"/>
+    <text x="14" y="20" font-size="15" font-weight="700" fill="#0A555D">→</text>
+    <text class="lbl mono" x="32" y="20" fill="#0A555D">trace hop 1 = 192.168.10.1</text>
+  </g>
+
+  <text class="lbl mut" x="40" y="670">Switch'ler TTL'e dokunmaz; iki switch asan paket de yalnizca R1'de bir kez dusurulur.</text>
+  <text class="lbl mut" x="40" y="688">Tum VLAN'lar arasi trafik SW1–R1 hattindan iki kez gecer — bu tasarimin darbogazi.</text>
+</svg>
